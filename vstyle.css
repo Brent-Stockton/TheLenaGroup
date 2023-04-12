@@ -58,7 +58,7 @@
 
 .section-heading {
   font-family: "Muli", serif;
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 50;
   color: #000000;
   margin-bottom: 3rem;
@@ -96,4 +96,13 @@
   .grid-container {
     grid-template-columns: 1fr;
   }
+
+  .back-button {
+    display: inline-block;
+    padding-top: 10px;
+    color: #000000;
+    font-size: 20px;
+    font-family: "Muli", serif;
+  }
 }
+
