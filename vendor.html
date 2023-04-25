@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Include the Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <!-- Link your custom styles.css -->
+    <link rel="stylesheet" href="vstyle.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Vendor List -->
+    <section id="vendor-list">
+      <a href="index.html" class="back-button">
+        <i class="fa fa-arrow-left"></i> Back
+      </a>
+      <div class="section-header">
+        <h1 class="section-heading">Vendor List</h1>
+        <div class="underline"></div>
+      </div>
+      <div class="grid-container"></div>
+    </section>
+
+    <!-- Include the Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-storage.js"></script>
+    <!-- Include the Swiper library -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyC4YmJpJnqN7qJo8is1iou0mJKsn-hyDN8",
+        authDomain: "lenagroup-4bc32.firebaseapp.com",
+        projectId: "lenagroup-4bc32",
+        storageBucket: "lenagroup-4bc32.appspot.com",
+        messagingSenderId: "664689503262",
+        appId: "1:664689503262:web:1b9b4060399d5be6a7d20f",
+        measurementId: "G-ZCLST0F7XF",
+      };
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Get a reference to the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Get the data from the Firestore collection
+      db.collection("vendorList")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            // Create HTML elements for each item in the collection
+            const item = document.createElement("div");
+            item.classList.add("grid-item");
+            item.innerHTML = `
+            <img src='./images/logo2.png' alt="logo"/>
+        <h2>${doc.data().name ? doc.data().name : ""}</h2>
+        <h3>${doc.data().company ? doc.data().company : ""}</h3>
+        <p><a href="mailto:example@example.com">${
+          doc.data().email ? doc.data().email : ""
+        }</a></p>
+        <p><a href="tel:+1234567890">${
+          doc.data().phone ? doc.data().phone : ""
+        }</a></p>
+        <p><a href="https://www.google.com/maps?q=${doc.data().address}">${
+              doc.data().address ? doc.data().address : ""
+            }</a></p>
+          
+      `;
+            gridContainer.appendChild(item);
+          });
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+    </script>
+  </body>
+</html>
