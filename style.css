@@ -1105,12 +1105,12 @@ textarea {
   }
 
   .r-card {
-    width: 50em;
+    width: 100%;
   }
 
   .review-card p {
     font-family: "Muli", serif;
-    font-size: 2.5em;
+    font-size: 2em;
   }
 }
 
