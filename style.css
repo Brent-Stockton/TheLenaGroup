@@ -494,7 +494,7 @@ body {
 /* For larger screens */
 @media screen and (min-width: 768px) {
   .about-us {
-    height: 100vh;
+    height: 100%;
   }
 }
 
